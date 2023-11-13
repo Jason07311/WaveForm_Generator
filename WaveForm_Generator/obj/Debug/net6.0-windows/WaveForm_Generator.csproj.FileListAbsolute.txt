@@ -1,0 +1,17 @@
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\bin\Debug\net6.0-windows\WaveForm_Generator.exe
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\bin\Debug\net6.0-windows\WaveForm_Generator.deps.json
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\bin\Debug\net6.0-windows\WaveForm_Generator.runtimeconfig.json
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\bin\Debug\net6.0-windows\WaveForm_Generator.dll
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\bin\Debug\net6.0-windows\WaveForm_Generator.pdb
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.csproj.AssemblyReference.cache
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.Form1.resources
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.csproj.GenerateResource.cache
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.AssemblyInfoInputs.cache
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.AssemblyInfo.cs
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.csproj.CoreCompileInputs.cache
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.dll
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\refint\WaveForm_Generator.dll
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.pdb
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.genruntimeconfig.cache
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\ref\WaveForm_Generator.dll

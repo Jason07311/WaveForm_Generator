@@ -2,9 +2,11 @@ using ScottPlot;
 using ScottPlot.Plottable;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace WaveForm_Generator
 {
@@ -34,28 +36,11 @@ namespace WaveForm_Generator
 
         }
 
+        // Function to plot graphs
+
         private void plotFunc1()
         {
-            var plt = formsPlot1.Plot;
-
-            // sample data
-            double[] xs = DataGen.Consecutive(51);
-            double[] sin = DataGen.Sin(51);
-            double[] cos = DataGen.Cos(51);
-
-            // plot the data
-            plt.AddScatter(xs, sin);
-            plt.AddScatter(xs, cos);
-
-            // customize the axis labels
-            plt.Title("ScottPlot Quickstart");
-            plt.XLabel("Horizontal Axis");
-            plt.YLabel("Vertical Axis");
-
-            // Save the Plotted Graph
-            // MessageBox.Show("Saved in: " + plt.SaveFig("quickstart_scatter.png"));
-
-            formsPlot1.Refresh();
+           
         }
 
         private void plotFunc2()
@@ -90,7 +75,31 @@ namespace WaveForm_Generator
 
         private void plotSine()
         {
+            var plt = formsPlot1.Plot;
 
+            // sample data
+            double[] xs = DataGen.Consecutive(51);
+            double[] sin = DataGen.Sin(51);
+            // double[] cos = DataGen.Cos(51);
+
+            // plot the data
+            plt.AddScatter(xs, sin);
+            // plt.AddScatter(xs, cos);
+
+            // customize the axis labels
+            plt.Title("ScottPlot Quickstart");
+            plt.XLabel("Horizontal Axis");
+            plt.YLabel("Vertical Axis");
+
+            // Save the Plotted Graph
+            // MessageBox.Show("Saved in: " + plt.SaveFig("quickstart_scatter.png"));
+
+            formsPlot1.Refresh();
+        }
+
+        private void plotRealTimeReadingDemo()
+        {
+            timer1.Start();
         }
 
         private List<double[]> ReadCsvVoltage(string filePath)
@@ -130,11 +139,14 @@ namespace WaveForm_Generator
 
             return data;
         }
+            
+
+        // Generate random data to replace device reading
 
         private double genRandNum()
         {
             Random rand = new Random();
-            double sensorValue = rand.NextDouble() * 10 + 20; //Random Value between 20 and 30
+            double sensorValue = rand.NextDouble() * 10; //Random Value between 20 and 30
             return sensorValue;
         }
 
@@ -162,19 +174,45 @@ namespace WaveForm_Generator
         }
 
         private void selectDataInput_Click(object sender, EventArgs e)
-        {
+        {            
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
+                string path = Application.StartupPath + @"~\graphData";
+                
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                openFileDialog.InitialDirectory = path;
                 openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
-
+                               
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    var fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+                    path = path + "\\" + fileName;
+                    if (!File.Exists(path))
+                    {
+                        try
+                        {
+                            File.Copy(openFileDialog.FileName, path);
+                            MessageBox.Show("Selected file uploaded to system local directory: " + fileName);
+                        }
+                        catch(Exception ex)
+                        {
+                            /*MessageBox.Show("File exist!");*/
+                        }
+                        
+                    }
+                    
                     selectedInputFile = openFileDialog.FileName;
-                    label3.Text = selectedInputFile;
+                    label3.Text = fileName;
                 }
+
+                
             }
+
         }
 
 
@@ -188,21 +226,25 @@ namespace WaveForm_Generator
 
         private void generateWaveBtn_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(comboBox1.Text.ToString());
             formsPlot1.Plot.Clear();
             timer1.Stop();
 
-            if (comboBox1.Text == "Function 1")
+
+            if (comboBox1.Text.ToString() == "Function 1")
             {
                 plotFunc1();
             }
-            else if (comboBox1.Text == "Function 2")
+            else if (comboBox1.Text.ToString() == "Function 2")
             {
                 plotFunc2();
             }
-            else if (comboBox1.Text == "Sine")
+            else if (comboBox1.Text.ToString() == "Sine")
             {
-                timer1.Start();
+                plotSine();
+            }
+            else if (comboBox1.Text.ToString() == "Real-Time Reading Demo")
+            {
+                plotRealTimeReadingDemo();
             }
             else
             {

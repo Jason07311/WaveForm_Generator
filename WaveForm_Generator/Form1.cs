@@ -34,18 +34,30 @@ namespace WaveForm_Generator
 
         }
 
+        // Function to plot graphs
+
         private void plotFunc1()
+        {
+           
+        }
+
+        private void plotFunc2()
+        {
+
+        }
+
+        private void plotSine()
         {
             var plt = formsPlot1.Plot;
 
             // sample data
             double[] xs = DataGen.Consecutive(51);
             double[] sin = DataGen.Sin(51);
-            double[] cos = DataGen.Cos(51);
+            // double[] cos = DataGen.Cos(51);
 
             // plot the data
             plt.AddScatter(xs, sin);
-            plt.AddScatter(xs, cos);
+            // plt.AddScatter(xs, cos);
 
             // customize the axis labels
             plt.Title("ScottPlot Quickstart");
@@ -58,20 +70,16 @@ namespace WaveForm_Generator
             formsPlot1.Refresh();
         }
 
-        private void plotFunc2()
+        private void plotRealTimeReadingDemo()
         {
-
+            timer1.Start();
         }
 
-        private void plotSine()
-        {
-
-        }
-
+        // Generate random data to replace device reading
         private double genRandNum()
         {
             Random rand = new Random();
-            double sensorValue = rand.NextDouble() * 10 + 20; //Random Value between 20 and 30
+            double sensorValue = rand.NextDouble() * 10; //Random Value between 20 and 30
             return sensorValue;
         }
 
@@ -117,20 +125,24 @@ namespace WaveForm_Generator
 
         private void generateWaveBtn_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(comboBox1.Text.ToString());
             formsPlot1.Plot.Clear();
             timer1.Stop();
+
             if (comboBox1.Text.ToString() == "Function 1")
             {
                 plotFunc1();
             }
             else if (comboBox1.Text.ToString() == "Function 2")
             {
-
+                plotFunc2();
             }
             else if (comboBox1.Text.ToString() == "Sine")
             {
-                timer1.Start();
+                plotSine();
+            }
+            else if (comboBox1.Text.ToString() == "Real-Time Reading Demo")
+            {
+                plotRealTimeReadingDemo();
             }
             else
             {

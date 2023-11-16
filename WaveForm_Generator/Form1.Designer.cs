@@ -41,13 +41,13 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             panel4 = new Panel();
+            button3 = new Button();
             panel1 = new Panel();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel3 = new Panel();
             tabPage2 = new TabPage();
             tableLayoutPanel1 = new TableLayoutPanel();
             timer1 = new System.Windows.Forms.Timer(components);
-            button3 = new Button();
             button5 = new Button();
             panel2.SuspendLayout();
             tabControl1.SuspendLayout();
@@ -131,7 +131,7 @@
             // 
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Sine", "Function 1", "Function 2" });
+            comboBox1.Items.AddRange(new object[] { "Sine", "Function 1", "Function 2", "Real-Time Reading Demo" });
             comboBox1.Location = new Point(119, 21);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(161, 23);
@@ -197,6 +197,18 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(310, 135);
             panel4.TabIndex = 6;
+            // 
+            // button3
+            // 
+            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button3.Location = new Point(9, 91);
+            button3.Name = "button3";
+            button3.Size = new Size(292, 41);
+            button3.TabIndex = 7;
+            button3.Text = "Stop";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panel1
             // 
@@ -265,17 +277,6 @@
             // 
             timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
-            // 
-            // button3
-            // 
-            button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(9, 91);
-            button3.Name = "button3";
-            button3.Size = new Size(292, 41);
-            button3.TabIndex = 7;
-            button3.Text = "Stop";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // Form1
             // 

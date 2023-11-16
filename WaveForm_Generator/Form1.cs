@@ -2,11 +2,9 @@ using ScottPlot;
 using ScottPlot.Plottable;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace WaveForm_Generator
 {
@@ -15,6 +13,7 @@ namespace WaveForm_Generator
 
         string selectedInputFile = "Select a file";
         string selectedFunction = "Select Function";
+        private bool isAnimationRunning = false;
 
         // For real-time data
         double[] dataX = new double[0];
@@ -36,55 +35,18 @@ namespace WaveForm_Generator
 
         }
 
-        // Function to plot graphs
-
         private void plotFunc1()
-        {
-           
-        }
-
-        private void plotFunc2()
-        {
-            if (File.Exists(selectedInputFile))
-            {
-                var plt = formsPlot1.Plot;
-
-                // Read data from the CSV file
-                var csvData = ReadCsvVoltage(selectedInputFile);
-
-                // Extract time and voltage data
-                double[] time = csvData.Select(row => row[0]).ToArray();
-                double[] voltage = csvData.Select(row => row[1]).ToArray();
-
-                // Plot the data
-                plt.AddScatter(time, voltage, label: "Function 2 Data");
-
-                // Customize the axis labels
-                plt.Title("Function 2 Graph");
-                plt.XLabel("Time");
-                plt.YLabel("Voltage");
-
-                // Refresh the plot
-                formsPlot1.Render();
-            }
-            else
-            {
-                MessageBox.Show("Selected CSV file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void plotSine()
         {
             var plt = formsPlot1.Plot;
 
             // sample data
             double[] xs = DataGen.Consecutive(51);
             double[] sin = DataGen.Sin(51);
-            // double[] cos = DataGen.Cos(51);
+            double[] cos = DataGen.Cos(51);
 
             // plot the data
             plt.AddScatter(xs, sin);
-            // plt.AddScatter(xs, cos);
+            plt.AddScatter(xs, cos);
 
             // customize the axis labels
             plt.Title("ScottPlot Quickstart");
@@ -100,6 +62,83 @@ namespace WaveForm_Generator
         private void plotRealTimeReadingDemo()
         {
             timer1.Start();
+        }
+
+        private void plotFunc2()
+        {
+            if (File.Exists(selectedInputFile))
+            {
+                var plt = formsPlot1.Plot;
+
+                // Read data from the CSV file
+                var csvData = ReadCsvVoltage(selectedInputFile);
+
+                // Extract time and voltage data
+                double[] time = csvData.Select(row => row[0]).ToArray();
+                double[] voltage = csvData.Select(row => row[1]).ToArray();
+
+                // Plot the initial data
+                plt.AddScatter(time, voltage, label: "Function 2 Data");
+
+                // Customize the axis labels
+                plt.Title("Function 2 Graph");
+                plt.XLabel("Time");
+                plt.YLabel("Voltage");
+
+                // Set the axis limits based on the initial data
+                plt.AxisAuto();
+                double initialXMax = plt.GetAxisLimits().XMax;
+
+                // Refresh the plot
+                formsPlot1.Render();
+
+                // Define the continuous update function
+                Action updateFunction = () =>
+                {
+                    double xIncrement = 0.1; // x-increment size
+
+                    while (isAnimationRunning)
+                    {
+                        // Increment x values
+                        time = time.Select(t => t + xIncrement).ToArray();
+
+                        // Calculate corresponding y values using sine function
+                        voltage = time.Select(t => Math.Sin(t)).ToArray();
+
+                        // Plot the updated data
+                        Invoke((MethodInvoker)delegate //Updates UI from a background thread
+                        {
+                            plt.Clear();
+                            plt.AddScatter(time, voltage, label: "Function 2 Data");
+                            plt.AxisAuto();
+                            formsPlot1.Render();
+                        });
+
+                        // Pause for a short duration 
+                        System.Threading.Thread.Sleep(100);
+                    }
+                };
+
+
+                // Run the continuous update function in a background thread
+                isAnimationRunning = true;
+                Task.Run(updateFunction);
+            }
+            else
+            {
+                MessageBox.Show("Selected CSV file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void stopAnimation()
+        {
+            isAnimationRunning = false;
+        }
+
+
+        private void plotSine()
+        {
+
         }
 
         private List<double[]> ReadCsvVoltage(string filePath)
@@ -139,14 +178,13 @@ namespace WaveForm_Generator
 
             return data;
         }
-            
+
 
         // Generate random data to replace device reading
-
         private double genRandNum()
         {
             Random rand = new Random();
-            double sensorValue = rand.NextDouble() * 10; //Random Value between 20 and 30
+            double sensorValue = rand.NextDouble() * 10 + 20; //Random Value between 20 and 30
             return sensorValue;
         }
 
@@ -174,45 +212,19 @@ namespace WaveForm_Generator
         }
 
         private void selectDataInput_Click(object sender, EventArgs e)
-        {            
+        {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                string path = Application.StartupPath + @"~\graphData";
-                
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                openFileDialog.InitialDirectory = path;
                 openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
-                               
+
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
-                    path = path + "\\" + fileName;
-                    if (!File.Exists(path))
-                    {
-                        try
-                        {
-                            File.Copy(openFileDialog.FileName, path);
-                            MessageBox.Show("Selected file uploaded to system local directory: " + fileName);
-                        }
-                        catch(Exception ex)
-                        {
-                            /*MessageBox.Show("File exist!");*/
-                        }
-                        
-                    }
-                    
                     selectedInputFile = openFileDialog.FileName;
-                    label3.Text = fileName;
+                    label3.Text = selectedInputFile;
                 }
-
-                
             }
-
         }
 
 
@@ -240,6 +252,7 @@ namespace WaveForm_Generator
             }
             else if (comboBox1.Text.ToString() == "Sine")
             {
+                timer1.Start();
                 plotSine();
             }
             else if (comboBox1.Text.ToString() == "Real-Time Reading Demo")
@@ -262,6 +275,13 @@ namespace WaveForm_Generator
         {
             formsPlot1.Plot.Clear();
             timer1.Stop();
+
+            // Stop the continuous update function
+            stopAnimation();
+
+            // Optionally, reset the data arrays if needed
+            dataX = new double[0];
+            dataY = new double[0];
         }
     }
 }

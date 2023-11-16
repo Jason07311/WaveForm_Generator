@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "aGHXYPbXMak+AVeBP0+tUfUWORoU8WmiUoWpc5OObxvOY4OBOO6Pg+3X7KMYofhn+sqrsKw64GMr3/pCuhiSyA==",
+  "dgSpecHash": "nYMLPq3v0FKapDjqKpVx2ED+R5K5CHwGeB8oAkrFYag+8CIa++ob3gGzWQjkfENKmMcyvsIoETNk/hb0n8EpDQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Jason\\D_Drive\\Career_Skills\\C# .NET\\WaveForm_Generator\\WaveForm_Generator\\WaveForm_Generator.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Jason\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.4\\microsoft.netcore.platforms.3.1.4.nupkg.sha512",
+    "C:\\Users\\Jason\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Jason\\.nuget\\packages\\scottplot\\4.1.68\\scottplot.4.1.68.nupkg.sha512",
+    "C:\\Users\\Jason\\.nuget\\packages\\scottplot.winforms\\4.1.68\\scottplot.winforms.4.1.68.nupkg.sha512",
+    "C:\\Users\\Jason\\.nuget\\packages\\system.drawing.common\\4.7.2\\system.drawing.common.4.7.2.nupkg.sha512",
+    "C:\\Users\\Jason\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
   "logs": []
 }

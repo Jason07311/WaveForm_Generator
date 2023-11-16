@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Button button5;
             formsPlot1 = new ScottPlot.FormsPlot();
             panel2 = new Panel();
@@ -45,6 +46,8 @@
             panel3 = new Panel();
             tabPage2 = new TabPage();
             tableLayoutPanel1 = new TableLayoutPanel();
+            timer1 = new System.Windows.Forms.Timer(components);
+            button3 = new Button();
             button5 = new Button();
             panel2.SuspendLayout();
             tabControl1.SuspendLayout();
@@ -65,7 +68,7 @@
             button5.TabIndex = 10;
             button5.Text = "Select Data Input";
             button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
+            button5.Click += selectDataInput_Click;
             // 
             // formsPlot1
             // 
@@ -115,7 +118,7 @@
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(9, 96);
+            button2.Location = new Point(9, 41);
             button2.Margin = new Padding(30, 100, 30, 30);
             button2.Name = "button2";
             button2.Size = new Size(292, 39);
@@ -128,7 +131,7 @@
             // 
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Sine", "Fucntion 1", "Function 2" });
+            comboBox1.Items.AddRange(new object[] { "Sine", "Function 1", "Function 2" });
             comboBox1.Location = new Point(119, 21);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(161, 23);
@@ -145,7 +148,6 @@
             label1.Size = new Size(98, 30);
             label1.TabIndex = 4;
             label1.Text = "Function:";
-            label1.Click += label1_Click;
             // 
             // button1
             // 
@@ -158,7 +160,7 @@
             button1.TabIndex = 2;
             button1.Text = "Add New Tab";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += addTab_Click;
             // 
             // tabControl1
             // 
@@ -189,6 +191,7 @@
             // panel4
             // 
             panel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            panel4.Controls.Add(button3);
             panel4.Controls.Add(button2);
             panel4.Location = new Point(6, 388);
             panel4.Name = "panel4";
@@ -258,6 +261,22 @@
             tableLayoutPanel1.Size = new Size(487, 37);
             tableLayoutPanel1.TabIndex = 3;
             // 
+            // timer1
+            // 
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
+            // button3
+            // 
+            button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button3.Location = new Point(9, 91);
+            button3.Name = "button3";
+            button3.Size = new Size(292, 41);
+            button3.TabIndex = 7;
+            button3.Text = "Stop";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -299,5 +318,7 @@
         private Panel panel3;
         private Panel panel1;
         private Panel panel4;
+        private System.Windows.Forms.Timer timer1;
+        private Button button3;
     }
 }

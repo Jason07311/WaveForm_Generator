@@ -208,7 +208,7 @@
             button3.TabIndex = 7;
             button3.Text = "Stop";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            button3.Click += stopWaveGen_Click;
             // 
             // panel1
             // 

@@ -36,7 +36,69 @@ namespace WaveForm_Generator
 
         }
 
-        // Function to plot graphs
+
+        // GUI 
+
+        private void addTab_Click(object sender, EventArgs e)
+        {
+            string title = "WaveGen " + (tabControl1.TabCount + 1).ToString();
+            TabPage myTabPage = new TabPage(title);
+            tabControl1.TabPages.Add(myTabPage);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedFunction = comboBox1.SelectedItem.ToString();
+            chgFunc = true;
+        }
+
+        private void tab_Click(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+            }
+        }
+
+        private void generateWaveBtn_Click(object sender, EventArgs e)
+        {
+            formsPlot1.Plot.Clear();
+            timer1.Stop();
+
+
+            if (comboBox1.Text.ToString() == "Function 1")
+            {
+                plotFunc1();
+            }
+            else if (comboBox1.Text.ToString() == "Function 2")
+            {
+                plotFunc2();
+            }
+            else if (comboBox1.Text.ToString() == "Sine")
+            {
+                plotSine();
+            }
+            else if (comboBox1.Text.ToString() == "Real-Time Reading Demo")
+            {
+                plotRealTimeReadingDemo();
+            }
+            else
+            {
+                MessageBox.Show("Function not Selected!");
+            }
+        }
+
+        private void stopWaveGen_Click(object sender, EventArgs e)
+        {
+            formsPlot1.Plot.Clear();
+            timer1.Stop();
+        }
+
+
+        // Main Features of the Waveform_Generator
+
+
+        // Functions to plot graphs
 
         private void plotFunc1()
         {
@@ -102,6 +164,9 @@ namespace WaveForm_Generator
             timer1.Start();
         }
 
+
+        // Read CSV files
+
         private List<double[]> ReadCsvVoltage(string filePath)
         {
             var data = new List<double[]>();
@@ -141,6 +206,7 @@ namespace WaveForm_Generator
         }
             
 
+
         // Generate random data to replace device reading
 
         private double genRandNum()
@@ -155,6 +221,7 @@ namespace WaveForm_Generator
             UpdateChart();
         }
 
+        // Update chart for each time it is called
         private void UpdateChart()
         {
             k++;
@@ -164,21 +231,18 @@ namespace WaveForm_Generator
             formsPlot1.Plot.AddScatter(dataX, dataY, color: Color.Orange);
             formsPlot1.Plot.AxisAuto();
             formsPlot1.Render();
-        }
+        }                
 
-        private void addTab_Click(object sender, EventArgs e)
-        {
-            string title = "TabPage " + (tabControl1.TabCount + 1).ToString();
-            TabPage myTabPage = new TabPage(title);
-            tabControl1.TabPages.Add(myTabPage);
-        }
+        
+
+        // Select and upload CSV file to system, local directory
 
         private void selectDataInput_Click(object sender, EventArgs e)
-        {            
+        {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 string path = Application.StartupPath + @"~\graphData";
-                
+
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
@@ -187,7 +251,7 @@ namespace WaveForm_Generator
                 openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
-                               
+
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     var fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
@@ -199,69 +263,21 @@ namespace WaveForm_Generator
                             File.Copy(openFileDialog.FileName, path);
                             MessageBox.Show("Selected file uploaded to system local directory: " + fileName);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             /*MessageBox.Show("File exist!");*/
                         }
-                        
+
                     }
-                    
+
                     selectedInputFile = openFileDialog.FileName;
                     label3.Text = fileName;
                 }
 
-                
+
             }
 
         }
 
-
-        private void tab_Click(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Middle)
-            {
-                tabControl1.TabPages.Remove(tabControl1.SelectedTab);
-            }
-        }
-
-        private void generateWaveBtn_Click(object sender, EventArgs e)
-        {
-            formsPlot1.Plot.Clear();
-            timer1.Stop();
-
-
-            if (comboBox1.Text.ToString() == "Function 1")
-            {
-                plotFunc1();
-            }
-            else if (comboBox1.Text.ToString() == "Function 2")
-            {
-                plotFunc2();
-            }
-            else if (comboBox1.Text.ToString() == "Sine")
-            {
-                plotSine();
-            }
-            else if (comboBox1.Text.ToString() == "Real-Time Reading Demo")
-            {
-                plotRealTimeReadingDemo();
-            }
-            else
-            {
-                MessageBox.Show("Function not Selected!");
-            }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedFunction = comboBox1.SelectedItem.ToString();
-            chgFunc = true;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            formsPlot1.Plot.Clear();
-            timer1.Stop();
-        }
     }
 }

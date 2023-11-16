@@ -21,8 +21,12 @@ namespace WaveForm_Generator
         double[] dataY = new double[0];
         int k = 0;
 
-        // Current Plot
+        // Current Funciton on Plot
         bool chgFunc = false;
+
+        // x-label, y-label
+        string xLabel = "";
+        string yLabel = "";
 
         public Form1()
         {
@@ -33,6 +37,7 @@ namespace WaveForm_Generator
 
         private void formsPlot1_Load(object sender, EventArgs e)
         {
+            formsPlot1.Plot.Style(Style.Blue2);
 
         }
 
@@ -102,7 +107,30 @@ namespace WaveForm_Generator
 
         private void plotFunc1()
         {
-           
+            var plt = formsPlot1.Plot;
+            
+            try
+            {
+                var datas = ReadCsvCurrent(selectedInputFile);
+                
+
+                // Plot Graph
+                plt.AddScatter(datas[0].ToArray(), datas[1].ToArray());
+                
+
+                // Customize the axis labels
+                plt.Title(yLabel + " against " + xLabel);
+                plt.XLabel(xLabel);
+                plt.YLabel(yLabel);
+
+                formsPlot1.Refresh();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void plotFunc2()
@@ -114,9 +142,11 @@ namespace WaveForm_Generator
                 // Read data from the CSV file
                 var csvData = ReadCsvVoltage(selectedInputFile);
 
+
                 // Extract time and voltage data
                 double[] time = csvData.Select(row => row[0]).ToArray();
                 double[] voltage = csvData.Select(row => row[1]).ToArray();
+
 
                 // Plot the data
                 plt.AddScatter(time, voltage, label: "Function 2 Data");
@@ -204,7 +234,55 @@ namespace WaveForm_Generator
 
             return data;
         }
-            
+
+        private List<List<double>> ReadCsvCurrent(string filePath)
+        {
+            List<List<double>> datas = new List<List<double>>();
+
+            List<double> xData = new List<double>();
+
+            List<double> yData = new List<double>();
+
+            try
+            {
+                if (File.Exists(selectedInputFile))
+                {
+
+                    using (StreamReader rd = new StreamReader(selectedInputFile))
+                    {
+                        string firstLine = rd.ReadLine();
+
+                        xLabel = firstLine.Split(",")[0];
+                        yLabel = firstLine.Split(",")[1];
+
+                        string line = "";
+
+                        while ((line = rd.ReadLine()) != null)
+                        {
+                            var arr = line.Split(",");
+                            xData.Add(Double.Parse(arr[0]));
+                            yData.Add(Double.Parse(arr[1]));
+                        }
+
+                    }
+
+                    datas.Add(xData);
+                    datas.Add(yData);
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+
+            return datas;
+        }
+
 
 
         // Generate random data to replace device reading
@@ -231,9 +309,9 @@ namespace WaveForm_Generator
             formsPlot1.Plot.AddScatter(dataX, dataY, color: Color.Orange);
             formsPlot1.Plot.AxisAuto();
             formsPlot1.Render();
-        }                
+        }
 
-        
+
 
         // Select and upload CSV file to system, local directory
 
@@ -278,6 +356,7 @@ namespace WaveForm_Generator
             }
 
         }
+
 
     }
 }

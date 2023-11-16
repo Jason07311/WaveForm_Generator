@@ -1,5 +1,6 @@
 using ScottPlot;
 using ScottPlot.Plottable;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -138,7 +139,26 @@ namespace WaveForm_Generator
 
         private void plotSine()
         {
+            var plt = formsPlot1.Plot;
 
+            // sample data
+            double[] xs = DataGen.Consecutive(51);
+            double[] sin = DataGen.Sin(51);
+            // double[] cos = DataGen.Cos(51);
+
+            // plot the data
+            plt.AddScatter(xs, sin);
+            // plt.AddScatter(xs, cos);
+
+            // customize the axis labels
+            plt.Title("ScottPlot Quickstart");
+            plt.XLabel("Horizontal Axis");
+            plt.YLabel("Vertical Axis");
+
+            // Save the Plotted Graph
+            // MessageBox.Show("Saved in: " + plt.SaveFig("quickstart_scatter.png"));
+
+            formsPlot1.Refresh();
         }
 
         private List<double[]> ReadCsvVoltage(string filePath)

@@ -24,7 +24,7 @@ namespace WaveForm_Generator
 
         private void button4_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
+            /*OpenFileDialog dialog = new OpenFileDialog();
             string path = Application.StartupPath + @"~\graphData\";
 
             dialog.InitialDirectory = path;
@@ -35,7 +35,25 @@ namespace WaveForm_Generator
 
             label3.Text = fileName;
 
-            label4.Text = path + fileName;
+            label4.Text = path + fileName;*/
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                string path = Application.StartupPath + @"~\graphData\";
+                openFileDialog.InitialDirectory = path;
+                openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+
+                    label3.Text = fileName;
+
+                    label4.Text = path + fileName;
+                }
+            }
 
         }
 

@@ -5,8 +5,10 @@ using System.IO;
 using System.Reflection.Emit;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Reflection;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+
 
 namespace WaveForm_Generator
 {
@@ -33,12 +35,12 @@ namespace WaveForm_Generator
             InitializeComponent();
             label3.Text = selectedInputFile;
             comboBox1.Text = selectedFunction;
+            formsPlot1.Plot.Style(Style.Blue1);
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)
         {
-            formsPlot1.Plot.Style(Style.Blue2);
-
+            //formsPlot1.Plot.Style(Style.Blue1);
         }
 
 
@@ -49,6 +51,7 @@ namespace WaveForm_Generator
             string title = "WaveGen " + (tabControl1.TabCount + 1).ToString();
             TabPage myTabPage = new TabPage(title);
             tabControl1.TabPages.Add(myTabPage);
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -57,14 +60,14 @@ namespace WaveForm_Generator
             chgFunc = true;
         }
 
-        private void tab_Click(object sender, MouseEventArgs e)
+        private void closeTab_Click(object sender, MouseEventArgs e)
         {
             var tabs = tabControl1.TabPages;
 
-            if (e.Button == MouseButtons.Middle)
+            if (e.Button == MouseButtons.Middle && tabControl1.TabCount > 1)
             {
                 tabControl1.TabPages.Remove(tabs.Cast<TabPage>()
-                    .Where((t,i) => tabControl1.GetTabRect(i).Contains(e.Location))
+                    .Where((t, i) => tabControl1.GetTabRect(i).Contains(e.Location))
                     .First());
             }
         }
@@ -111,12 +114,15 @@ namespace WaveForm_Generator
 
         private void plotFunc1()
         {
+
+            MultipleFunctionForm form = new MultipleFunctionForm();
+            form.ShowDialog();
+
             var plt = formsPlot1.Plot;
 
             try
             {
                 var datas = ReadCsvCurrent(selectedInputFile);
-
 
                 // Plot Graph
                 plt.AddScatter(datas[0].ToArray(), datas[1].ToArray());
@@ -133,8 +139,10 @@ namespace WaveForm_Generator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
         }
 
         private void plotFunc2()
@@ -273,12 +281,15 @@ namespace WaveForm_Generator
                     datas.Add(xData);
                     datas.Add(yData);
 
-
+                }
+                else
+                {
+                    throw new Exception("File not exist!");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -361,6 +372,9 @@ namespace WaveForm_Generator
 
         }
 
+        private void save_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

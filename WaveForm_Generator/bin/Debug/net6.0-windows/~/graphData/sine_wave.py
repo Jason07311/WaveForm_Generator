@@ -25,3 +25,5 @@ with open(csv_filename, 'w', newline='') as csv_file:
         csv_writer.writerow([time, voltage])
 
 print(f"CSV file '{csv_filename}' created successfully.")
+
+

@@ -59,9 +59,13 @@ namespace WaveForm_Generator
 
         private void tab_Click(object sender, MouseEventArgs e)
         {
+            var tabs = tabControl1.TabPages;
+
             if (e.Button == MouseButtons.Middle)
             {
-                tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+                tabControl1.TabPages.Remove(tabs.Cast<TabPage>()
+                    .Where((t,i) => tabControl1.GetTabRect(i).Contains(e.Location))
+                    .First());
             }
         }
 
@@ -108,15 +112,15 @@ namespace WaveForm_Generator
         private void plotFunc1()
         {
             var plt = formsPlot1.Plot;
-            
+
             try
             {
                 var datas = ReadCsvCurrent(selectedInputFile);
-                
+
 
                 // Plot Graph
                 plt.AddScatter(datas[0].ToArray(), datas[1].ToArray());
-                
+
 
                 // Customize the axis labels
                 plt.Title(yLabel + " against " + xLabel);

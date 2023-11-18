@@ -83,9 +83,8 @@ namespace WaveForm_Generator
 
         private void generateWaveBtn_Click(object sender, EventArgs e)
         {
-            formsPlot1.Plot.Clear();
+            formsPlot1.Plot.Clear(); // Clear the existing plot
             timer1.Stop();
-
 
             if (comboBox1.Text.ToString() == "Function 1")
             {
@@ -101,7 +100,7 @@ namespace WaveForm_Generator
             }
             else
             {
-                MessageBox.Show("Function not Selected!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Function not Selected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -203,9 +202,17 @@ namespace WaveForm_Generator
             {
                 var plt = formsPlot1.Plot;
 
+                // Check if an animation is already running and stop it
+                if (isAnimationRunning)
+                {
+                    stopAnimation();
+                }
+
+                // Clear the existing plot before plotting a new graph
+                formsPlot1.Plot.Clear();
+
                 // Read data from the CSV file
                 var csvData = ReadCsvVoltage(selectedInputFile);
-
 
                 // Extract time and voltage data
                 double[] time = csvData.Select(row => row[0]).ToArray();
@@ -215,9 +222,15 @@ namespace WaveForm_Generator
                 plt.AddScatter(time, voltage, label: "Function 2 Data");
 
                 // Customize the axis labels
-                plt.Title("Function 2 Graph");
-                plt.XLabel("Time");
-                plt.YLabel("Voltage");
+                //plt.Title("Function 2 Graph");
+                // plt.XLabel("Time");
+                // plt.YLabel("Voltage");
+
+                plt.Title(yLabel + " against " + xLabel);
+                plt.XLabel(xLabel);
+                plt.YLabel(yLabel);
+
+                plt.Legend();
 
                 // Set the axis limits based on the initial data
                 plt.AxisAuto();
@@ -242,7 +255,9 @@ namespace WaveForm_Generator
                         // Plot the updated data
                         Invoke((MethodInvoker)delegate //Updates UI from a background thread
                         {
-                            plt.Clear();
+                            // Clear the existing plot before updating with new data
+                            formsPlot1.Plot.Clear();
+
                             plt.AddScatter(time, voltage, label: "Function 2 Data");
                             plt.AxisAuto();
                             formsPlot1.Render();
@@ -252,7 +267,6 @@ namespace WaveForm_Generator
                         System.Threading.Thread.Sleep(100);
                     }
                 };
-
 
                 // Run the continuous update function in a background thread
                 isAnimationRunning = true;
@@ -285,6 +299,11 @@ namespace WaveForm_Generator
             {
                 using (var reader = new StreamReader(filePath))
                 {
+                    string firstLine = reader.ReadLine();
+
+                    xLabel = firstLine.Split(",")[0];
+                    yLabel = firstLine.Split(",")[1];
+
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
@@ -295,7 +314,7 @@ namespace WaveForm_Generator
 
                         // Attempt to parse values
                         try
-                        {
+                        {                           
                             var values = line.Split(',').Select(double.Parse).ToArray();
                             data.Add(values);
                         }
@@ -393,6 +412,13 @@ namespace WaveForm_Generator
 
         private void selectDataInput_Click(object sender, EventArgs e)
         {
+            // Check if an animation is running then prompts the message box if true
+            if (isAnimationRunning)
+            {
+                MessageBox.Show("Please stop the animation before selecting a new CSV file.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 string path = Application.StartupPath + @"~\graphData";
@@ -415,22 +441,18 @@ namespace WaveForm_Generator
                         try
                         {
                             File.Copy(openFileDialog.FileName, path);
-                            MessageBox.Show("Selected file uploaded to system local directory: " + fileName);
+                            MessageBox.Show("Selected file uploaded to the system local directory: " + fileName);
                         }
                         catch (Exception ex)
                         {
-                            // MessageBox.Show("File exist!");
+                            // Handle the exception
                         }
-
                     }
 
                     selectedInputFile = openFileDialog.FileName;
                     label3.Text = fileName;
                 }
-
-
             }
-
         }
 
         private void save_Click(object sender, EventArgs e)

@@ -44,6 +44,7 @@
             button4 = new Button();
             button3 = new Button();
             panel1 = new Panel();
+            checkedListBox1 = new CheckedListBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel3 = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -61,10 +62,10 @@
             // button5
             // 
             button5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button5.Location = new Point(15, 147);
+            button5.Location = new Point(15, 145);
             button5.Margin = new Padding(15);
             button5.Name = "button5";
-            button5.Size = new Size(262, 36);
+            button5.Size = new Size(262, 35);
             button5.TabIndex = 10;
             button5.Text = "Select Data Input";
             button5.UseVisualStyleBackColor = true;
@@ -84,10 +85,10 @@
             // 
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(15, 81);
+            panel2.Location = new Point(15, 80);
             panel2.Margin = new Padding(15);
             panel2.Name = "panel2";
-            panel2.Size = new Size(262, 36);
+            panel2.Size = new Size(262, 35);
             panel2.TabIndex = 2;
             // 
             // label2
@@ -131,7 +132,7 @@
             // 
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Sine", "Function 1", "Function 2", "Real-Time Reading Demo" });
+            comboBox1.Items.AddRange(new object[] { "Function 1", "Function 2", "Real-Time Reading Demo" });
             comboBox1.Location = new Point(119, 21);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(161, 23);
@@ -156,7 +157,7 @@
             button1.Location = new Point(15, 15);
             button1.Margin = new Padding(15);
             button1.Name = "button1";
-            button1.Size = new Size(262, 36);
+            button1.Size = new Size(262, 30);
             button1.TabIndex = 2;
             button1.Text = "Add New Tab";
             button1.UseVisualStyleBackColor = true;
@@ -189,7 +190,7 @@
             // 
             // panel4
             // 
-            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            panel4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             panel4.Controls.Add(button4);
             panel4.Controls.Add(button3);
             panel4.Controls.Add(button2);
@@ -224,11 +225,23 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(checkedListBox1);
             panel1.Controls.Add(tableLayoutPanel2);
-            panel1.Location = new Point(6, 29);
+            panel1.Location = new Point(6, 6);
             panel1.Name = "panel1";
-            panel1.Size = new Size(310, 319);
+            panel1.Size = new Size(310, 342);
             panel1.TabIndex = 3;
+            // 
+            // checkedListBox1
+            // 
+            checkedListBox1.BackColor = SystemColors.Window;
+            checkedListBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Items.AddRange(new object[] { "DC", "Sine", "Cosine", "Square", "Triangle", "Normal Plot" });
+            checkedListBox1.Location = new Point(24, 272);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(265, 70);
+            checkedListBox1.TabIndex = 7;
             // 
             // tableLayoutPanel2
             // 
@@ -239,27 +252,26 @@
             tableLayoutPanel2.Controls.Add(panel2, 0, 1);
             tableLayoutPanel2.Controls.Add(button5, 0, 2);
             tableLayoutPanel2.Controls.Add(button1, 0, 0);
-            tableLayoutPanel2.Location = new Point(9, 20);
+            tableLayoutPanel2.Location = new Point(9, 9);
             tableLayoutPanel2.Margin = new Padding(0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 4;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(292, 264);
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.Size = new Size(292, 260);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // panel3
             // 
             panel3.Controls.Add(label1);
             panel3.Controls.Add(comboBox1);
-            panel3.Location = new Point(0, 198);
+            panel3.Location = new Point(0, 195);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(15);
-            panel3.Size = new Size(292, 66);
+            panel3.Size = new Size(292, 58);
             panel3.TabIndex = 6;
             // 
             // tableLayoutPanel1
@@ -323,5 +335,6 @@
         private System.Windows.Forms.Timer timer1;
         private Button button3;
         private Button button4;
+        private CheckedListBox checkedListBox1;
     }
 }

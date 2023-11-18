@@ -12,9 +12,17 @@ namespace WaveForm_Generator
 {
     public partial class MultipleFunctionForm : Form
     {
+
+        List<string> arr = new List<string>();
+
         public MultipleFunctionForm()
         {
             InitializeComponent();
+        }
+
+        private void MultipleFunctionForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

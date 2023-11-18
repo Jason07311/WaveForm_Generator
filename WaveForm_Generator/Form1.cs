@@ -23,8 +23,7 @@ namespace WaveForm_Generator
         double[] dataY = new double[0];
         int k = 0;
 
-        // Current Funciton on Plot
-        bool chgFunc = false;
+
 
         // x-label, y-label
         string xLabel = "";
@@ -36,6 +35,7 @@ namespace WaveForm_Generator
             label3.Text = selectedInputFile;
             comboBox1.Text = selectedFunction;
             formsPlot1.Plot.Style(Style.Blue1);
+            checkedListBox1.Visible = false;
         }
 
         private void formsPlot1_Load(object sender, EventArgs e)
@@ -57,7 +57,15 @@ namespace WaveForm_Generator
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedFunction = comboBox1.SelectedItem.ToString();
-            chgFunc = true;
+            if (selectedFunction == "Function 1")
+            {
+                checkedListBox1.Visible = true;
+            }
+            else
+            {
+                checkedListBox1.Visible = false;
+            }
+
         }
 
         private void closeTab_Click(object sender, MouseEventArgs e)
@@ -86,10 +94,6 @@ namespace WaveForm_Generator
             {
                 plotFunc2();
             }
-            else if (comboBox1.Text.ToString() == "Sine")
-            {
-                plotSine();
-            }
             else if (comboBox1.Text.ToString() == "Real-Time Reading Demo")
             {
                 plotRealTimeReadingDemo();
@@ -114,18 +118,56 @@ namespace WaveForm_Generator
 
         private void plotFunc1()
         {
-
-            MultipleFunctionForm form = new MultipleFunctionForm();
-            form.ShowDialog();
-
             var plt = formsPlot1.Plot;
+
+            // Read file
+            var datas = ReadCsvCurrent(selectedInputFile);
 
             try
             {
-                var datas = ReadCsvCurrent(selectedInputFile);
+                // Check if any functions selected
+                if (checkedListBox1.CheckedItems.Count <= 0)
+                {
+                    throw new Exception("Please select functions to be plotted!");
+                }
 
-                // Plot Graph
-                plt.AddScatter(datas[0].ToArray(), datas[1].ToArray());
+                foreach (var function in checkedListBox1.CheckedItems)
+                {
+                    List<double> ydata = new List<double>();
+
+                    switch (function.ToString())
+                    {
+                        case "DC":
+                            datas[0].ForEach(y => ydata.Add(6));
+                            plt.AddScatter(datas[0].ToArray(), ydata.ToArray()).Label = "DC";
+                            break;
+                        case "Sine":
+                            // y = A sin (wt), w = 2*PI*f, f = frequency
+                            datas[0].ForEach(y => ydata.Add(4.0 * Math.Sin(2 * Math.PI * 1.0 * y)));
+                            plt.AddScatter(datas[0].ToArray(), ydata.ToArray()).Label = "Sine";
+                            break;
+                        case "Cosine":
+                            // y = A cos (wt)
+                            datas[0].ForEach(y => ydata.Add(2.0 * Math.Cos(2 * Math.PI * 1.0 * y)));
+                            plt.AddScatter(datas[0].ToArray(), ydata.ToArray()).Label = "Cosine";
+                            break;
+                        case "Square":
+                            // y[k] = Math.Sin(freq * k)>=0?A:-1*A;
+                            datas[0].ForEach(y => ydata.Add(Math.Sin(1.0 * y) >= 0 ? 3.0 : -1 * 3.0));
+                            plt.AddScatter(datas[0].ToArray(), ydata.ToArray()).Label = "Square";
+                            break;
+                        case "Triangle":
+                            // y = (A/P) * (P - abs(x % (2*P) - P) )  
+                            datas[0].ForEach(y => ydata.Add((1 / 1) * (1 - Math.Abs(y % (2 * 1) - 1))));
+                            plt.AddScatter(datas[0].ToArray(), ydata.ToArray()).Label = "Triangle";
+                            break;
+                        case "Normal Plot":
+                            plt.AddScatter(datas[0].ToArray(), datas[1].ToArray()).Label = "Normal Plot";
+                            break;
+                    }
+                }
+
+
 
 
                 // Customize the axis labels
@@ -133,13 +175,15 @@ namespace WaveForm_Generator
                 plt.XLabel(xLabel);
                 plt.YLabel(yLabel);
 
+                plt.Legend();
+
                 formsPlot1.Refresh();
 
 
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -175,30 +219,6 @@ namespace WaveForm_Generator
             {
                 MessageBox.Show("Selected CSV file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void plotSine()
-        {
-            var plt = formsPlot1.Plot;
-
-            // sample data
-            double[] xs = DataGen.Consecutive(51);
-            double[] sin = DataGen.Sin(51);
-            // double[] cos = DataGen.Cos(51);
-
-            // plot the data
-            plt.AddScatter(xs, sin);
-            // plt.AddScatter(xs, cos);
-
-            // customize the axis labels
-            plt.Title("ScottPlot Quickstart");
-            plt.XLabel("Horizontal Axis");
-            plt.YLabel("Vertical Axis");
-
-            // Save the Plotted Graph
-            // MessageBox.Show("Saved in: " + plt.SaveFig("quickstart_scatter.png"));
-
-            formsPlot1.Refresh();
         }
 
         private void plotRealTimeReadingDemo()

@@ -101,7 +101,7 @@ namespace WaveForm_Generator
             }
             else
             {
-                MessageBox.Show("Function not Selected!");
+                MessageBox.Show("Function not Selected!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
@@ -360,9 +360,6 @@ namespace WaveForm_Generator
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
-
-
             return datas;
         }
 
@@ -394,7 +391,6 @@ namespace WaveForm_Generator
         }
 
 
-
         private void selectDataInput_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -423,7 +419,7 @@ namespace WaveForm_Generator
                         }
                         catch (Exception ex)
                         {
-                            /*MessageBox.Show("File exist!");*/
+                            // MessageBox.Show("File exist!");
                         }
 
                     }

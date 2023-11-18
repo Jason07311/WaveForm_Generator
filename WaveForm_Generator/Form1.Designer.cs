@@ -41,11 +41,12 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             panel4 = new Panel();
+            button4 = new Button();
             button3 = new Button();
             panel1 = new Panel();
+            checkedListBox1 = new CheckedListBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel3 = new Panel();
-            tabPage2 = new TabPage();
             tableLayoutPanel1 = new TableLayoutPanel();
             timer1 = new System.Windows.Forms.Timer(components);
             button5 = new Button();
@@ -61,10 +62,10 @@
             // button5
             // 
             button5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button5.Location = new Point(15, 147);
+            button5.Location = new Point(15, 145);
             button5.Margin = new Padding(15);
             button5.Name = "button5";
-            button5.Size = new Size(262, 36);
+            button5.Size = new Size(262, 35);
             button5.TabIndex = 10;
             button5.Text = "Select Data Input";
             button5.UseVisualStyleBackColor = true;
@@ -73,7 +74,7 @@
             // formsPlot1
             // 
             formsPlot1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            formsPlot1.Location = new Point(301, 39);
+            formsPlot1.Location = new Point(323, 29);
             formsPlot1.Margin = new Padding(4, 3, 4, 3);
             formsPlot1.Name = "formsPlot1";
             formsPlot1.Size = new Size(740, 494);
@@ -84,10 +85,10 @@
             // 
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(15, 81);
+            panel2.Location = new Point(15, 80);
             panel2.Margin = new Padding(15);
             panel2.Name = "panel2";
-            panel2.Size = new Size(262, 36);
+            panel2.Size = new Size(262, 35);
             panel2.TabIndex = 2;
             // 
             // label2
@@ -118,7 +119,7 @@
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(9, 41);
+            button2.Location = new Point(9, 8);
             button2.Margin = new Padding(30, 100, 30, 30);
             button2.Name = "button2";
             button2.Size = new Size(292, 39);
@@ -131,7 +132,7 @@
             // 
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Sine", "Function 1", "Function 2", "Real-Time Reading Demo" });
+            comboBox1.Items.AddRange(new object[] { "Function 1", "Function 2", "Real-Time Reading Demo" });
             comboBox1.Location = new Point(119, 21);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(161, 23);
@@ -156,7 +157,7 @@
             button1.Location = new Point(15, 15);
             button1.Margin = new Padding(15);
             button1.Name = "button1";
-            button1.Size = new Size(262, 36);
+            button1.Size = new Size(262, 30);
             button1.TabIndex = 2;
             button1.Text = "Add New Tab";
             button1.UseVisualStyleBackColor = true;
@@ -166,13 +167,12 @@
             // 
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
             tabControl1.Location = new Point(12, 50);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1079, 599);
             tabControl1.TabIndex = 2;
-            tabControl1.MouseClick += tab_Click;
+            tabControl1.MouseClick += closeTab_Click;
             // 
             // tabPage1
             // 
@@ -185,38 +185,63 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(1071, 571);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
+            tabPage1.Text = "WaveGen 1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
-            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            panel4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            panel4.Controls.Add(button4);
             panel4.Controls.Add(button3);
             panel4.Controls.Add(button2);
-            panel4.Location = new Point(6, 388);
+            panel4.Location = new Point(6, 354);
             panel4.Name = "panel4";
-            panel4.Size = new Size(310, 135);
+            panel4.Size = new Size(310, 169);
             panel4.TabIndex = 6;
+            // 
+            // button4
+            // 
+            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button4.Location = new Point(9, 125);
+            button4.Name = "button4";
+            button4.Size = new Size(292, 41);
+            button4.TabIndex = 8;
+            button4.Text = "Save";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += save_Click;
             // 
             // button3
             // 
             button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(9, 91);
+            button3.Location = new Point(9, 66);
             button3.Name = "button3";
             button3.Size = new Size(292, 41);
             button3.TabIndex = 7;
             button3.Text = "Stop";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            button3.Click += stopWaveGen_Click;
             // 
             // panel1
             // 
+            panel1.Controls.Add(checkedListBox1);
             panel1.Controls.Add(tableLayoutPanel2);
-            panel1.Location = new Point(6, 29);
+            panel1.Location = new Point(6, 6);
             panel1.Name = "panel1";
-            panel1.Size = new Size(310, 352);
+            panel1.Size = new Size(310, 342);
             panel1.TabIndex = 3;
+            // 
+            // checkedListBox1
+            // 
+            checkedListBox1.BackColor = SystemColors.Window;
+            checkedListBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Items.AddRange(new object[] { "DC", "Sine", "Cosine", "Square", "Triangle", "Normal Plot" });
+            checkedListBox1.Location = new Point(24, 272);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(265, 70);
+            checkedListBox1.TabIndex = 7;
             // 
             // tableLayoutPanel2
             // 
@@ -227,38 +252,27 @@
             tableLayoutPanel2.Controls.Add(panel2, 0, 1);
             tableLayoutPanel2.Controls.Add(button5, 0, 2);
             tableLayoutPanel2.Controls.Add(button1, 0, 0);
-            tableLayoutPanel2.Location = new Point(9, 20);
+            tableLayoutPanel2.Location = new Point(9, 9);
             tableLayoutPanel2.Margin = new Padding(0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 4;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(292, 264);
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.Size = new Size(292, 260);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // panel3
             // 
             panel3.Controls.Add(label1);
             panel3.Controls.Add(comboBox1);
-            panel3.Location = new Point(0, 198);
+            panel3.Location = new Point(0, 195);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(15);
-            panel3.Size = new Size(292, 66);
+            panel3.Size = new Size(292, 58);
             panel3.TabIndex = 6;
-            // 
-            // tabPage2
-            // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1071, 571);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -306,7 +320,6 @@
         private Button button1;
         private TabControl tabControl1;
         private TabPage tabPage1;
-        private TabPage tabPage2;
         private Label label1;
         private ComboBox comboBox1;
         private Button button2;
@@ -321,5 +334,7 @@
         private Panel panel4;
         private System.Windows.Forms.Timer timer1;
         private Button button3;
+        private Button button4;
+        private CheckedListBox checkedListBox1;
     }
 }

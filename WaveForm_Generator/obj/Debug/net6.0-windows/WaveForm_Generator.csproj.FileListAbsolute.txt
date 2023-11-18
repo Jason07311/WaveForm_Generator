@@ -18,4 +18,6 @@ C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generat
 C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\bin\Debug\net6.0-windows\ScottPlot.dll
 C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\bin\Debug\net6.0-windows\ScottPlot.WinForms.dll
 C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.csproj.CopyComplete
-C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.Data_Input.resources
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.MultipleFunctionForm.resources
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.WaveGenTab.resources
+C:\Users\Jason\D_Drive\Career_Skills\C# .NET\WaveForm_Generator\WaveForm_Generator\obj\Debug\net6.0-windows\WaveForm_Generator.Properties.Resources.resources

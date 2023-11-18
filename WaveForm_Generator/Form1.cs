@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using System.Reflection;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using System.Xml.Linq;
 
 namespace WaveForm_Generator
 {
@@ -20,8 +21,9 @@ namespace WaveForm_Generator
         private bool isAnimationRunning = false;
 
         // For real-time data
-        double[] dataX = new double[0];
-        double[] dataY = new double[0];
+        List<double> dataX = new List<double>();
+        List<double> dataY = new List<double>();
+        List<List<double>> multiDataY = new List<List<double>>();
         int k = 0;
 
 
@@ -65,6 +67,10 @@ namespace WaveForm_Generator
             else
             {
                 checkedListBox1.Visible = false;
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
+                }
             }
 
         }
@@ -83,8 +89,16 @@ namespace WaveForm_Generator
 
         private void generateWaveBtn_Click(object sender, EventArgs e)
         {
-            formsPlot1.Plot.Clear(); // Clear the existing plot
+            // Clear the plot and stop timer if any is running when start generate wave
+            formsPlot1.Plot.Clear();
             timer1.Stop();
+
+            // Redefine all global variable when start generate wave
+            dataX = new List<double>();
+            dataY = new List<double>();
+            multiDataY = new List<List<double>>();
+            xLabel = "";
+            yLabel = "";
 
             if (comboBox1.Text.ToString() == "Function 1")
             {
@@ -106,15 +120,12 @@ namespace WaveForm_Generator
 
         private void stopWaveGen_Click(object sender, EventArgs e)
         {
-            formsPlot1.Plot.Clear();
+            // formsPlot1.Plot.Clear();
             timer1.Stop();
 
             // Stop the continuous update function
             stopAnimation();
-
-            // Optionally, reset the data arrays if needed
-            dataX = new double[0];
-            dataY = new double[0];
+            
         }
 
 
@@ -138,6 +149,11 @@ namespace WaveForm_Generator
                     throw new Exception("Please select functions to be plotted!");
                 }
 
+                // For update y label to be written in file
+                string temp = yLabel;
+                yLabel = yLabel + "(" + checkedListBox1.CheckedItems[0].ToString() + ")";
+                int index = 0;
+
                 foreach (var function in checkedListBox1.CheckedItems)
                 {
                     List<double> ydata = new List<double>();
@@ -145,6 +161,7 @@ namespace WaveForm_Generator
                     switch (function.ToString())
                     {
                         case "DC":
+                            // y = constant value
                             datas[0].ForEach(y => ydata.Add(6));
                             plt.AddScatter(datas[0].ToArray(), ydata.ToArray()).Label = "DC";
                             break;
@@ -169,12 +186,31 @@ namespace WaveForm_Generator
                             plt.AddScatter(datas[0].ToArray(), ydata.ToArray()).Label = "Triangle";
                             break;
                         case "Normal Plot":
+                            // y taken from original data input file y-data points
+                            datas[1].ForEach(y => ydata.Add(y));
                             plt.AddScatter(datas[0].ToArray(), datas[1].ToArray()).Label = "Normal Plot";
                             break;
                     }
+
+                    // Keep track of y datas for each function
+                    multiDataY.Add(ydata);
+
+                    // Update on y label by adding function name                    
+                    if (index <= 0)
+                    {
+                        index++;
+                    }
+                    else
+                    {
+                        yLabel = yLabel + "," + temp + "(" + function.ToString() + ")";
+                    }
+
+
+
                 }
 
-
+                // Keep track of x datas for all function
+                dataX.AddRange(datas[0]);
 
 
                 // Customize the axis labels
@@ -289,7 +325,39 @@ namespace WaveForm_Generator
         }
 
 
-        // Read CSV files
+        // Generate random data to replace device reading
+        private double genRandNum()
+        {
+            Random rand = new Random();
+            double sensorValue = rand.NextDouble() * 10; //Random Value between 20 and 30
+            return sensorValue;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            UpdateChart();
+        }
+
+        // Update chart for each time it is called
+        private void UpdateChart()
+        {
+            xLabel = "X";
+            yLabel = "Demo Real-Time Reading Y";
+
+            k++;
+            double newValue = genRandNum();
+            dataX.Add(k);
+            dataY.Add(newValue);
+            formsPlot1.Plot.XLabel(xLabel);
+            formsPlot1.Plot.YLabel(yLabel);
+            formsPlot1.Plot.Title($"{yLabel} against {xLabel}");
+            formsPlot1.Plot.AddScatter(dataX.ToArray(), dataY.ToArray(), color: Color.Orange);
+            formsPlot1.Plot.AxisAuto();
+            formsPlot1.Refresh();
+        }
+
+
+        // Read from and Write to CSV files
 
         private List<double[]> ReadCsvVoltage(string filePath)
         {
@@ -382,34 +450,60 @@ namespace WaveForm_Generator
             return datas;
         }
 
-
-
-        // Generate random data to replace device reading
-        private double genRandNum()
+        private void WriteToCsv(string filepath)
         {
-            Random rand = new Random();
-            double sensorValue = rand.NextDouble() * 10; //Random Value between 20 and 30
-            return sensorValue;
+            using (StreamWriter sw = new StreamWriter(filepath))
+            {
+                // Write the first line which is the Labels
+
+                // If graph is a multiplotting graph...
+                if (comboBox1.SelectedItem.ToString() == "Function 1")
+                {
+                    var yLabels = yLabel.Split(",");
+                    string combineYLabels = "";
+
+                    for (int i = 0; i < yLabels.Length; i++)
+                    {
+                        combineYLabels = combineYLabels + "," + yLabels[i].ToString();
+                    }
+
+                    sw.WriteLine($"{xLabel}{combineYLabels}");
+                }
+                else
+                {
+                    sw.WriteLine($"{xLabel},{yLabel}");
+                }
+
+                // Writing the rest of the data 
+                for (int i = 0; i < dataX.Count; i++)
+                {
+                    // If graph is a multiplotting graph...
+                    if (comboBox1.SelectedItem.ToString() == "Function 1")
+                    {
+
+                        string combineYDatas = "";
+
+                        for (int j = 0; j < multiDataY.Count; j++)
+                        {
+                            combineYDatas = combineYDatas + "," + multiDataY[j][i].ToString("0.#########");
+                        }
+
+                        sw.WriteLine($"{dataX[i]}{combineYDatas}");
+                    }
+                    else
+                    {
+                        sw.WriteLine($"{dataX[i]},{dataY[i]}");
+                    }
+                }
+
+                sw.Close();
+            }
+
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            UpdateChart();
-        }
-
-        // Update chart for each time it is called
-        private void UpdateChart()
-        {
-            k++;
-            double newValue = genRandNum();
-            dataX = dataX.Append(k).ToArray();
-            dataY = dataY.Append(newValue).ToArray();
-            formsPlot1.Plot.AddScatter(dataX, dataY, color: Color.Orange);
-            formsPlot1.Plot.AxisAuto();
-            formsPlot1.Render();
-        }
 
 
+        // Select input file and upload to local system folder
         private void selectDataInput_Click(object sender, EventArgs e)
         {
             // Check if an animation is running then prompts the message box if true
@@ -445,7 +539,7 @@ namespace WaveForm_Generator
                         }
                         catch (Exception ex)
                         {
-                            // Handle the exception
+                            // MessageBox.Show("File exist!");
                         }
                     }
 
@@ -457,7 +551,61 @@ namespace WaveForm_Generator
 
         private void save_Click(object sender, EventArgs e)
         {
+            using (FolderBrowserDialog openFolderDialog = new FolderBrowserDialog())
+            {
+                string initialPath = "C:\\Users\\USER_NAME\\Downloads".Replace("USER_NAME", Environment.UserName);
 
+                openFolderDialog.InitialDirectory = initialPath;
+
+                if (openFolderDialog.ShowDialog() == DialogResult.OK)
+                {
+
+                    try
+                    {
+                        // Name for file to be saved
+                        string function = comboBox1.SelectedItem.ToString() == "Function 1" ? "MultiPlot " : "";
+
+                        // Path for file
+                        string saveImgPath = openFolderDialog.SelectedPath + "\\" + function + yLabel + " against " + xLabel + ".png";
+                        string saveCsvPath = openFolderDialog.SelectedPath + "\\" + function + yLabel + " against " + xLabel + ".csv";
+
+                        // Auto generate file name if repeated file name found
+                        bool flag = true;
+                        int index = 1;
+                        do
+                        {
+                            if (!File.Exists(saveImgPath))
+                            {
+                                // Save Image file
+                                formsPlot1.Plot.SaveFig(saveImgPath);
+
+                                // Save CSV file
+                                WriteToCsv(saveCsvPath);
+
+                                flag = false;
+                            }
+                            else
+                            {
+                                // Increment of file version index, if same file name found
+                                saveImgPath = openFolderDialog.SelectedPath + "\\" + function + yLabel + " against " + xLabel + "(" + index.ToString() + ")" + ".png";
+                                saveCsvPath = openFolderDialog.SelectedPath + "\\" + function + yLabel + " against " + xLabel + "(" + index.ToString() + ")" + ".csv";
+
+                                index++;
+                            }
+                        }
+                        while (flag);
+
+                        MessageBox.Show("File saved under " + openFolderDialog.SelectedPath + " .", "Saving Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("File save failed!", "Saving status", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+
+
+            }
         }
     }
 }

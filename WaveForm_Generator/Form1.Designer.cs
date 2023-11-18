@@ -157,7 +157,7 @@
             button1.Location = new Point(15, 15);
             button1.Margin = new Padding(15);
             button1.Name = "button1";
-            button1.Size = new Size(262, 30);
+            button1.Size = new Size(262, 35);
             button1.TabIndex = 2;
             button1.Text = "Add New Tab";
             button1.UseVisualStyleBackColor = true;
@@ -176,6 +176,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.BackColor = Color.White;
             tabPage1.Controls.Add(panel4);
             tabPage1.Controls.Add(panel1);
             tabPage1.Controls.Add(formsPlot1);
@@ -186,7 +187,6 @@
             tabPage1.Size = new Size(1071, 571);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "WaveGen 1";
-            tabPage1.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 

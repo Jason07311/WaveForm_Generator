@@ -254,6 +254,7 @@ namespace WaveForm_Generator
                 double[] time = csvData.Select(row => row[0]).ToArray();
                 double[] voltage = csvData.Select(row => row[1]).ToArray();
 
+
                 // Plot the initial data
                 plt.AddScatter(time, voltage, label: "Function 2 Data");
 
@@ -287,6 +288,12 @@ namespace WaveForm_Generator
 
                         // Calculate corresponding y values using sine function
                         voltage = time.Select(t => Math.Sin(t)).ToArray();
+
+                        // Redefine everytime thread runs and add time and voltage to global variable
+                        dataX = new List<double>();
+                        dataY = new List<double>();
+                        dataX.AddRange(time);
+                        dataY.AddRange(voltage);
 
                         // Plot the updated data
                         Invoke((MethodInvoker)delegate //Updates UI from a background thread

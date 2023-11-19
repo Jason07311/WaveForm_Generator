@@ -38,7 +38,7 @@ namespace WaveForm_Generator
             label3.Text = selectedInputFile;
             comboBox1.Text = selectedFunction;
             checkedListBox1.Visible = false;
-            
+
         }
 
         // Initialize graph design when program start running

@@ -161,7 +161,7 @@
             // button1
             // 
             button1.AutoSize = true;
-            button1.BackColor = Color.MidnightBlue;
+            button1.BackColor = Color.Navy;
             button1.FlatAppearance.BorderColor = Color.Red;
             button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             button1.Location = new Point(15, 15);
@@ -299,11 +299,11 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Showcard Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
             label4.Location = new Point(16, 9);
             label4.Name = "label4";
-            label4.Size = new Size(302, 27);
+            label4.Size = new Size(322, 25);
             label4.TabIndex = 3;
             label4.Text = "WaveForm Generator v1.0";
             // 

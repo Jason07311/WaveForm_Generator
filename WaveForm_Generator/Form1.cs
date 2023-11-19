@@ -37,15 +37,16 @@ namespace WaveForm_Generator
             InitializeComponent();
             label3.Text = selectedInputFile;
             comboBox1.Text = selectedFunction;
-            formsPlot1.Plot.Style(Style.Blue1);
             checkedListBox1.Visible = false;
+            
         }
 
-        private void formsPlot1_Load(object sender, EventArgs e)
+        // Initialize graph design when program start running
+        private void Form1_Shown(object sender, EventArgs e)
         {
-            //formsPlot1.Plot.Style(Style.Blue1);
+            formsPlot1.Plot.Style(Style.Blue1);
+            formsPlot1.Refresh();
         }
-
 
         // GUI 
 
@@ -616,5 +617,7 @@ namespace WaveForm_Generator
 
             }
         }
+
+
     }
 }

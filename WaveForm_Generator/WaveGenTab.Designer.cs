@@ -56,7 +56,7 @@
             // 
             // button2
             // 
-            button2.BackColor = Color.Purple;
+            button2.BackColor = Color.Red;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button2.Location = new Point(15, 145);
             button2.Margin = new Padding(15);
@@ -78,9 +78,9 @@
             // 
             // checkedListBox1
             // 
-            checkedListBox1.BackColor = Color.MediumVioletRed;
+            checkedListBox1.BackColor = Color.White;
             checkedListBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            checkedListBox1.ForeColor = Color.White;
+            checkedListBox1.ForeColor = Color.Black;
             checkedListBox1.FormattingEnabled = true;
             checkedListBox1.Items.AddRange(new object[] { "DC", "Sine", "Cosine", "Square", "Triangle", "Normal Plot" });
             checkedListBox1.Location = new Point(24, 272);
@@ -133,8 +133,8 @@
             // comboBox2
             // 
             comboBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            comboBox2.BackColor = Color.MediumVioletRed;
-            comboBox2.ForeColor = Color.White;
+            comboBox2.BackColor = Color.White;
+            comboBox2.ForeColor = Color.Black;
             comboBox2.FormattingEnabled = true;
             comboBox2.Items.AddRange(new object[] { "Function 1", "Function 2", "Real-Time Reading Demo" });
             comboBox2.Location = new Point(119, 21);
@@ -145,6 +145,7 @@
             // 
             // panel5
             // 
+            panel5.BackColor = Color.Transparent;
             panel5.Controls.Add(label5);
             panel5.Controls.Add(label6);
             panel5.Location = new Point(15, 80);
@@ -158,6 +159,7 @@
             label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.ForeColor = Color.White;
             label5.Location = new Point(3, 4);
             label5.Name = "label5";
             label5.Size = new Size(49, 30);
@@ -169,7 +171,7 @@
             label6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.ForeColor = Color.Maroon;
+            label6.ForeColor = Color.White;
             label6.Location = new Point(58, 4);
             label6.MaximumSize = new Size(500, 0);
             label6.Name = "label6";
@@ -180,7 +182,7 @@
             // button3
             // 
             button3.AutoSize = true;
-            button3.BackColor = Color.Purple;
+            button3.BackColor = Color.Navy;
             button3.FlatAppearance.BorderColor = Color.Red;
             button3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             button3.Location = new Point(15, 15);
@@ -206,8 +208,9 @@
             // button5
             // 
             button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button5.BackColor = Color.DarkMagenta;
+            button5.BackColor = Color.Navy;
             button5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button5.ForeColor = Color.White;
             button5.Location = new Point(9, 125);
             button5.Name = "button5";
             button5.Size = new Size(292, 41);
@@ -219,8 +222,9 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button4.BackColor = Color.DarkMagenta;
+            button4.BackColor = Color.Navy;
             button4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button4.ForeColor = Color.White;
             button4.Location = new Point(9, 66);
             button4.Name = "button4";
             button4.Size = new Size(292, 41);
@@ -232,7 +236,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button1.BackColor = Color.DarkMagenta;
+            button1.BackColor = Color.Red;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button1.Location = new Point(9, 8);
             button1.Margin = new Padding(30, 100, 30, 30);
@@ -246,7 +250,8 @@
             // formsPlot1
             // 
             formsPlot1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            formsPlot1.BackColor = Color.Magenta;
+            formsPlot1.BackColor = Color.Transparent;
+            formsPlot1.ForeColor = Color.Transparent;
             formsPlot1.Location = new Point(323, 29);
             formsPlot1.Margin = new Padding(4, 3, 4, 3);
             formsPlot1.Name = "formsPlot1";
@@ -258,13 +263,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            BackColor = Color.Black;
+            BackColor = Color.FromArgb(0, 0, 64);
             Controls.Add(formsPlot1);
             Controls.Add(panel2);
             Controls.Add(panel1);
             ForeColor = SystemColors.ControlLightLight;
             Name = "WaveGenTab";
             Size = new Size(1080, 543);
+            Load += Form1_Shown;
             panel1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();

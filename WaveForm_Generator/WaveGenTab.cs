@@ -41,11 +41,11 @@ namespace WaveForm_Generator
         string xLabel = "";
         string yLabel = "";
 
-        private void formsPlot1_Load(object sender, EventArgs e)
+        private void Form1_Shown(object sender, EventArgs e)
         {
-            //formsPlot1.Plot.Style(Style.Blue1);
+            formsPlot1.Plot.Style(Style.Blue1);
+            formsPlot1.Refresh();
         }
-
 
         // GUI 
 
@@ -552,7 +552,7 @@ namespace WaveForm_Generator
                     }
 
                     selectedInputFile = openFileDialog.FileName;
-                    label4.Text = fileName;
+                    label6.Text = fileName;
                 }
             }
         }

@@ -47,8 +47,8 @@
             checkedListBox1 = new CheckedListBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel3 = new Panel();
-            tableLayoutPanel1 = new TableLayoutPanel();
             timer1 = new System.Windows.Forms.Timer(components);
+            label4 = new Label();
             button5 = new Button();
             panel2.SuspendLayout();
             tabControl1.SuspendLayout();
@@ -61,6 +61,7 @@
             // 
             // button5
             // 
+            button5.BackColor = Color.Purple;
             button5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button5.Location = new Point(15, 145);
             button5.Margin = new Padding(15);
@@ -68,12 +69,13 @@
             button5.Size = new Size(262, 35);
             button5.TabIndex = 10;
             button5.Text = "Select Data Input";
-            button5.UseVisualStyleBackColor = true;
+            button5.UseVisualStyleBackColor = false;
             button5.Click += selectDataInput_Click;
             // 
             // formsPlot1
             // 
             formsPlot1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            formsPlot1.BackColor = Color.Magenta;
             formsPlot1.Location = new Point(323, 29);
             formsPlot1.Margin = new Padding(4, 3, 4, 3);
             formsPlot1.Name = "formsPlot1";
@@ -107,7 +109,7 @@
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.Red;
+            label3.ForeColor = Color.Maroon;
             label3.Location = new Point(58, 4);
             label3.MaximumSize = new Size(500, 0);
             label3.Name = "label3";
@@ -118,19 +120,22 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button2.BackColor = Color.DarkMagenta;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button2.Location = new Point(9, 8);
             button2.Margin = new Padding(30, 100, 30, 30);
             button2.Name = "button2";
-            button2.Size = new Size(292, 39);
+            button2.Size = new Size(292, 41);
             button2.TabIndex = 5;
             button2.Text = "Generate Wave";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
             button2.Click += generateWaveBtn_Click;
             // 
             // comboBox1
             // 
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            comboBox1.BackColor = Color.MediumVioletRed;
+            comboBox1.ForeColor = Color.White;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Function 1", "Function 2", "Real-Time Reading Demo" });
             comboBox1.Location = new Point(119, 21);
@@ -153,6 +158,8 @@
             // button1
             // 
             button1.AutoSize = true;
+            button1.BackColor = Color.Purple;
+            button1.FlatAppearance.BorderColor = Color.Red;
             button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             button1.Location = new Point(15, 15);
             button1.Margin = new Padding(15);
@@ -160,7 +167,7 @@
             button1.Size = new Size(262, 35);
             button1.TabIndex = 2;
             button1.Text = "Add New Tab";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += addTab_Click;
             // 
             // tabControl1
@@ -170,21 +177,21 @@
             tabControl1.Location = new Point(12, 50);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1079, 599);
+            tabControl1.Size = new Size(1088, 571);
             tabControl1.TabIndex = 2;
             tabControl1.MouseClick += closeTab_Click;
             // 
             // tabPage1
             // 
-            tabPage1.BackColor = Color.White;
+            tabPage1.BackColor = Color.Black;
             tabPage1.Controls.Add(panel4);
             tabPage1.Controls.Add(panel1);
             tabPage1.Controls.Add(formsPlot1);
-            tabPage1.ForeColor = SystemColors.ControlText;
+            tabPage1.ForeColor = Color.White;
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1071, 571);
+            tabPage1.Size = new Size(1080, 543);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "WaveGen 1";
             // 
@@ -202,25 +209,27 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button4.BackColor = Color.DarkMagenta;
             button4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button4.Location = new Point(9, 125);
             button4.Name = "button4";
             button4.Size = new Size(292, 41);
             button4.TabIndex = 8;
             button4.Text = "Save";
-            button4.UseVisualStyleBackColor = true;
+            button4.UseVisualStyleBackColor = false;
             button4.Click += save_Click;
             // 
             // button3
             // 
             button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button3.BackColor = Color.DarkMagenta;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button3.Location = new Point(9, 66);
             button3.Name = "button3";
             button3.Size = new Size(292, 41);
             button3.TabIndex = 7;
             button3.Text = "Stop";
-            button3.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = false;
             button3.Click += stopWaveGen_Click;
             // 
             // panel1
@@ -234,8 +243,9 @@
             // 
             // checkedListBox1
             // 
-            checkedListBox1.BackColor = SystemColors.Window;
+            checkedListBox1.BackColor = Color.MediumVioletRed;
             checkedListBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            checkedListBox1.ForeColor = Color.White;
             checkedListBox1.FormattingEnabled = true;
             checkedListBox1.Items.AddRange(new object[] { "DC", "Sine", "Cosine", "Square", "Triangle", "Normal Plot" });
             checkedListBox1.Location = new Point(24, 272);
@@ -274,33 +284,33 @@
             panel3.Size = new Size(292, 58);
             panel3.TabIndex = 6;
             // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.Location = new Point(12, 7);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(487, 37);
-            tableLayoutPanel1.TabIndex = 3;
-            // 
             // timer1
             // 
             timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Showcard Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.ForeColor = SystemColors.ControlLightLight;
+            label4.Location = new Point(16, 9);
+            label4.Name = "label4";
+            label4.Size = new Size(302, 27);
+            label4.TabIndex = 3;
+            label4.Text = "WaveForm Generator v1.0";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1092, 661);
-            Controls.Add(tableLayoutPanel1);
+            BackColor = SystemColors.ActiveCaptionText;
+            ClientSize = new Size(1112, 661);
+            Controls.Add(label4);
             Controls.Add(tabControl1);
+            ForeColor = Color.Transparent;
             Name = "Form1";
-            Text = "Form1";
+            Text = "WaveForm Generator v1.0";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             tabControl1.ResumeLayout(false);
@@ -312,6 +322,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -326,7 +337,6 @@
         private Label label3;
         private Label label2;
         private Button button5;
-        private TableLayoutPanel tableLayoutPanel1;
         private Panel panel2;
         private TableLayoutPanel tableLayoutPanel2;
         private Panel panel3;
@@ -336,5 +346,6 @@
         private Button button3;
         private Button button4;
         private CheckedListBox checkedListBox1;
+        private Label label4;
     }
 }

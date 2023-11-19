@@ -16,6 +16,10 @@ sampling_rate = 100.0  # Adjust the sampling rate as needed
 # Generate sine wave data
 time_data, current_data = generate_cosine_wave(num_points, amplitude, frequency, sampling_rate)
 
+# Create a unique CSV filename
+csv_filename = 'cosine_wave_data.csv'
+file_counter = 1
+
 # Create CSV file
 csv_filename = 'cosine_wave_data.csv'
 with open(csv_filename, 'w', newline='') as csv_file:

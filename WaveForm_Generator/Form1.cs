@@ -51,8 +51,10 @@ namespace WaveForm_Generator
 
         private void addTab_Click(object sender, EventArgs e)
         {
+            WaveGenTab newWaveGenTab = new WaveGenTab(tabControl1);
             string title = "WaveGen " + (tabControl1.TabCount + 1).ToString();
             TabPage myTabPage = new TabPage(title);
+            myTabPage.Controls.Add(newWaveGenTab);
             tabControl1.TabPages.Add(myTabPage);
 
         }
@@ -125,7 +127,7 @@ namespace WaveForm_Generator
 
             // Stop the continuous update function
             stopAnimation();
-            
+
         }
 
 
@@ -389,7 +391,7 @@ namespace WaveForm_Generator
 
                         // Attempt to parse values
                         try
-                        {                           
+                        {
                             var values = line.Split(',').Select(double.Parse).ToArray();
                             data.Add(values);
                         }

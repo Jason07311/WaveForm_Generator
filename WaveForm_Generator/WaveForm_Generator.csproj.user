@@ -4,9 +4,6 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MultipleFunctionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="WaveGenTab.cs">
       <SubType>UserControl</SubType>
     </Compile>

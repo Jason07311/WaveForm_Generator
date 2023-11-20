@@ -61,7 +61,16 @@ namespace WaveForm_Generator
 
         }
 
-        // paints a gradient background
+        // Ensures Background colour adjusts when UI resized
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+            // Force a repaint when the form is resized
+            this.Invalidate();
+        }
+
+        // Forces Gradient Background colour on UI
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             Color customColor1 = Color.FromArgb(55, 79, 106);
@@ -72,6 +81,7 @@ namespace WaveForm_Generator
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
         }
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

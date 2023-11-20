@@ -67,6 +67,11 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += selectDataInput_Click;
             // 
+            // timer2
+            // 
+            timer2.Interval = 1000;
+            timer2.Tick += timer2_Tick;
+            // 
             // panel1
             // 
             panel1.Controls.Add(checkedListBox1);

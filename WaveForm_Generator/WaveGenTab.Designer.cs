@@ -56,7 +56,7 @@
             // 
             // button2
             // 
-            button2.BackColor = Color.Red;
+            button2.BackColor = Color.CadetBlue;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button2.Location = new Point(15, 145);
             button2.Margin = new Padding(15);
@@ -182,7 +182,7 @@
             // button3
             // 
             button3.AutoSize = true;
-            button3.BackColor = Color.Navy;
+            button3.BackColor = Color.LightSlateGray;
             button3.FlatAppearance.BorderColor = Color.Red;
             button3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             button3.Location = new Point(15, 15);
@@ -208,7 +208,7 @@
             // button5
             // 
             button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button5.BackColor = Color.Navy;
+            button5.BackColor = Color.LightSlateGray;
             button5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button5.ForeColor = Color.White;
             button5.Location = new Point(9, 125);
@@ -222,7 +222,7 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button4.BackColor = Color.Navy;
+            button4.BackColor = Color.LightCoral;
             button4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button4.ForeColor = Color.White;
             button4.Location = new Point(9, 66);
@@ -236,7 +236,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button1.BackColor = Color.Red;
+            button1.BackColor = Color.CadetBlue;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button1.Location = new Point(9, 8);
             button1.Margin = new Padding(30, 100, 30, 30);
@@ -263,7 +263,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            BackColor = Color.FromArgb(0, 0, 64);
+            BackColor = Color.FromArgb(14, 39, 48);
             Controls.Add(formsPlot1);
             Controls.Add(panel2);
             Controls.Add(panel1);

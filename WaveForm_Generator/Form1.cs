@@ -10,6 +10,7 @@ using System.Reflection;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Xml.Linq;
+using System.Drawing.Drawing2D;
 
 namespace WaveForm_Generator
 {
@@ -58,6 +59,18 @@ namespace WaveForm_Generator
             myTabPage.Controls.Add(newWaveGenTab);
             tabControl1.TabPages.Add(myTabPage);
 
+        }
+
+        // paints a gradient background
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            Color customColor1 = Color.FromArgb(55, 79, 106);
+            Color customColor2 = Color.FromArgb(20, 29, 48);
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, customColor1, customColor2, 90F))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -617,7 +630,7 @@ namespace WaveForm_Generator
 
             }
         }
-
+       
 
     }
 }

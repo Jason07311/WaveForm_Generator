@@ -61,7 +61,7 @@
             // 
             // button5
             // 
-            button5.BackColor = Color.Red;
+            button5.BackColor = Color.CadetBlue;
             button5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button5.ForeColor = Color.WhiteSmoke;
             button5.Location = new Point(15, 145);
@@ -122,7 +122,7 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button2.BackColor = Color.Red;
+            button2.BackColor = Color.CadetBlue;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button2.Location = new Point(9, 8);
             button2.Margin = new Padding(30, 100, 30, 30);
@@ -161,7 +161,7 @@
             // button1
             // 
             button1.AutoSize = true;
-            button1.BackColor = Color.Navy;
+            button1.BackColor = Color.LightSlateGray;
             button1.FlatAppearance.BorderColor = Color.Red;
             button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             button1.Location = new Point(15, 15);
@@ -186,7 +186,7 @@
             // 
             // tabPage1
             // 
-            tabPage1.BackColor = Color.FromArgb(0, 0, 64);
+            tabPage1.BackColor = Color.FromArgb(14, 39, 48);
             tabPage1.Controls.Add(panel4);
             tabPage1.Controls.Add(panel1);
             tabPage1.Controls.Add(formsPlot1);
@@ -212,7 +212,7 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button4.BackColor = Color.Navy;
+            button4.BackColor = Color.LightSlateGray;
             button4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button4.ForeColor = Color.White;
             button4.Location = new Point(9, 125);
@@ -226,7 +226,7 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            button3.BackColor = Color.Navy;
+            button3.BackColor = Color.LightCoral;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
             button3.Location = new Point(9, 66);

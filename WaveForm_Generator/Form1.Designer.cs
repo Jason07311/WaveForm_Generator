@@ -299,13 +299,14 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Font = new Font("Trebuchet MS", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
             label4.Location = new Point(16, 9);
             label4.Name = "label4";
-            label4.Size = new Size(322, 25);
+            label4.Size = new Size(279, 35);
             label4.TabIndex = 3;
-            label4.Text = "WaveForm Generator v1.0";
+            label4.Text = "Waveform Generator";
+            label4.Click += label4_Click;
             // 
             // Form1
             // 
